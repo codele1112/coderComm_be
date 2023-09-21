@@ -1,0 +1,25 @@
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+
+const postSchema = Schema(
+  {
+    content: { type: String, require: true },
+    image: { type: String, default: "" },
+    author: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: "User",
+    },
+    commentCount: { type: Number, default: 0 },
+    reactions: {
+      like: { type: Number, default: 0 },
+      dislike: { type: Number, default: 0 },
+    },
+    isDeleted: { type: Boolean, default: false },
+  },
+
+  { timestamps: true }
+);
+
+const Post = mongoose.model("Post", postSchema);
+module.exports = Post;
